@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('inundacion_2020', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->geometry('location', subtype: 'point')->nullable();
+            $table->geometry('area', subtype: 'polygon')->nullable();
+            $table->integer('nivel');
+            $table->integer('year');
+            $table->timestamps();
+        });
+    }
+    
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('inundacion_2020');
+    }
+};
